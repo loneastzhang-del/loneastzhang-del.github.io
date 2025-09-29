@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Project Acceptance Certificate · A4</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+  <style>
+    :root{
+      --brand-orange:#ff7a00;
+      --brand-orange-2:#ff912b;
+      --brand-green:#0b5d32;
+      --bg:#F6F4EE;
+      --card:#FFF7ED;
+      --ink:#1f2937;
+      --muted:#667085;
+      --line:#E7DDCF;
+      --radius:14px;
+      --shadow:0 8px 20px rgba(16,24,40,.06);
+      --focus:0 0 0 2px rgba(255,122,0,.18);
+      --base:14.5px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Noto Sans SC', system-ui, -apple-system, Segoe UI, Roboto, Arial, "Microsoft YaHei", sans-serif;
+      font-size:var(--base);
+      color:var(--ink);
+      background:
+        radial-gradient(900px 600px at 10% -10%, rgba(255,122,0,.06), transparent 60%),
+        radial-gradient(800px 500px at 110% -10%, rgba(11,93,50,.06), transparent 55%),
+        var(--bg);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding:24px 12px;
+      display:flex; justify-content:center; align-items:flex-start; overflow:auto;
+    }
+
+    .shell{width:100%; max-width:1000px; border-radius:calc(var(--radius)+2px); background:var(--card); box-shadow:var(--shadow); overflow:visible; margin-bottom:48px;}
+    .accent-bar{height:6px; background:linear-gradient(90deg, var(--brand-orange), var(--brand-green));}
+
+    header{min-height:90px;
+      display:grid; grid-template-columns:auto 1fr auto;
+      align-items:center; gap:12px; padding:16px 18px 6px
+    }
+    .logo{display:flex; align-items:center; justify-content:center; width:clamp(140px, 22vw, 260px); height:100%; line-height:0;}
+    .logo img{display:block; margin:0 auto; max-height:80px; max-width:100%; width:auto; height:auto; object-fit:contain; object-position:center center;}
+
+    .title{
+      text-align:center;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+    }
+    .title h1{margin:0; font-size:24px; font-weight:800; color:var(--brand-orange); line-height:1.2}
+    
+    .top-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+
+    /* 日期：仅显示日期文本，无“日期”两字、无边框 */
+    .date-text{font-weight:800; color:#111827; white-space:nowrap}
+    
+    .content{padding:6px 18px 56px; display:grid; gap:12px}
+    .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:14px; box-shadow:0 1px 0 rgba(16,24,40,.04)}
+    .card h3{margin:0 0 8px; font-size:17px; font-weight:800; color:var(--brand-green)}
+    .sub{font-size:12.5px; color:#667085; font-weight:500}
+
+    .grid-compact{display:grid; grid-template-columns:1fr 2fr 1fr 2fr; gap:10px 12px; align-items:center}
+    @media (max-width:900px){.grid-compact{grid-template-columns:1fr 1fr}}
+    label{font-size:13.5px; font-weight:700; color:#344054}
+    input[type=text], textarea {
+      width:100%; padding:9px 10px; border:1px solid var(--line);
+      border-radius:10px; background:#fff; font-size:14px; outline:none;
+      transition:box-shadow .25s ease, border-color .25s ease; height:36px;
+      box-shadow:0 0 4px rgba(0,0,0,0.06);
+    }
+    textarea{min-height:84px; height:auto;}
+
+    input[type=text]:hover, textarea:hover {
+      border-color: var(--brand-orange-2);
+      box-shadow:0 0 6px rgba(255,145,43,0.4);
+    }
+    input[type=text]:focus, textarea:focus {
+      border-color: var(--brand-green);
+      box-shadow:0 0 10px rgba(11,93,50,0.55);
+    }
+
+    .table-wrap{overflow:auto}
+    table{width:100%; border-collapse:separate; border-spacing:0}
+    thead th{font-size:11px; color:#7a7f89; text-transform:uppercase; letter-spacing:.02em; padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; background:#FFEFD9; position:sticky; top:0; z-index:1;}
+    tbody td{padding:10px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+    tbody tr:nth-child(odd){background:#FFF2E3}
+    .no{width:44px; text-align:center; color:#9aa3af; font-weight:800}
+    .item-title{font-weight:800; color:#111827; font-size:14.5px; margin-bottom:4px}
+    .item-sub{color:#7b8190; font-size:12.5px}
+    .ticks{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .tick-label{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:20px; cursor:pointer; user-select:none; font-size:13px}
+    .ticks input[type=radio]{accent-color:var(--brand-green); transform:scale(1.05)}
+    .remarks textarea{width:100%; min-height:70px; padding:10px; border-radius:10px;}
+
+    .signs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:920px){.signs{grid-template-columns:1fr}}
+    .pad{border:1px solid #ffd9ba; border-radius:10px; height:128px; background:#fff; position:relative; box-shadow:inset 0 1px 0 rgba(16,24,40,.03);}
+    .pad::before{content:"Sign here / 请在此签名"; position:absolute; inset:auto 0 6px; text-align:center; color:#c0c7d2; font-size:11px}
+    .pad.signed::before{opacity:0}
+    canvas.signature{width:100%; height:100%}
+    .tiny{display:block; text-align:center; margin-top:4px}
+    .ghost{border:1px solid var(--line); background:#f3f4f6; color:#374151; border-radius:8px; padding:5px 8px; font-size:12px; cursor:pointer}
+    .ghost:hover{background:#e5e7eb}
+
+    /* 居中开场文字 */
+    .intro{text-align:center}
+
+    .shell{padding-bottom:0}
+
+    /* ===== Glow & Emboss (visual-only; no layout/logic changes) ===== */
+    :root{
+      --glow-orange: rgba(255,145,43,.45);
+      --glow-green: rgba(11,93,50,.45);
+      --emboss-hi: rgba(255,255,255,.9);
+      --emboss-lo: rgba(0,0,0,.12);
+    }
+
+    .card{
+      transition: box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover{
+      border-color: #ffd9ba;
+      box-shadow:
+        0 0 0 1px rgba(255,145,43,.12),
+        0 10px 24px rgba(16,24,40,.07),
+        0 0 18px var(--glow-orange);
+    }
+
+    input[type=text], textarea{
+      background: linear-gradient(#fff, #fff) padding-box, linear-gradient(180deg, #fff 0%, #f6f7f9 100%) border-box;
+      box-shadow:
+        0 0 4px rgba(0,0,0,0.06),
+        inset 0 1px 0 rgba(255,255,255,.9),
+        inset 0 -1px 0 rgba(0,0,0,.03);
+    }
+    input[type=text]:hover, textarea:hover{
+      box-shadow:
+        0 0 6px rgba(255,145,43,0.4),
+        inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    input[type=text]:focus, textarea:focus{
+      box-shadow:
+        0 0 10px rgba(11,93,50,0.55),
+        0 0 0 1px rgba(11,93,50,.18),
+        inset 0 1px 0 rgba(255,255,255,.9);
+    }
+
+    .tick-label{
+      transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      background: #fff;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        inset 0 -1px 0 rgba(0,0,0,.03);
+    }
+    .tick-label:hover{
+      border-color:#ffddb8;
+      box-shadow: 0 0 10px var(--glow-orange);
+    }
+    .tick-label:has(input[type=radio]:checked){
+      border-color:#0b5d32;
+      background: linear-gradient(180deg,#ffffff 0%, #f3fff8 100%);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.95),
+        inset 0 -2px 4px rgba(11,93,50,.15),
+        0 0 0 2px rgba(11,93,50,.10),
+        0 0 12px var(--glow-green);
+    }
+
+    tbody tr{
+      transition: background-color .2s ease, box-shadow .2s ease;
+    }
+    tbody tr:hover{
+      background-color:#FFF8EF;
+      box-shadow: 0 0 0 1px rgba(255,145,43,.18) inset, 0 0 12px var(--glow-orange);
+    }
+
+    .pad{
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+    .pad:hover, .pad:focus-within{
+      border-color:#ffddb8;
+      box-shadow:
+        0 0 0 2px rgba(255,145,43,.15) inset,
+        0 0 14px var(--glow-orange);
+    }
+    .pad.signed{
+      border-color:#0b5d32;
+      box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.06),
+        0 0 0 2px rgba(11,93,50,.12) inset,
+        0 0 14px var(--glow-green);
+    }
+
+    .logo:hover{
+      filter: drop-shadow(0 0 10px rgba(255,122,0,.35));
+    }
+
+    .date-text{
+      transition: text-shadow .2s ease;
+    }
+    .date-text:hover{
+      text-shadow: 0 0 10px rgba(255,145,43,.45);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; }
+    }
+
+    .tick-label:has(input[type=radio][value="NO"]) {
+      color: #d92d20;
+      border-color: #fca5a5;
+    }
+    .tick-label:has(input[type=radio][value="NO"]:checked) {
+      border-color: #d92d20;
+      background: linear-gradient(180deg, #fff5f5 0%, #ffe4e4 100%);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.95),
+        inset 0 -2px 4px rgba(217,45,32,.15),
+        0 0 0 2px rgba(217,45,32,.10),
+        0 0 12px rgba(217,45,32,.45);
+    }
+  
+/* --- A4 fallback print --- */
+@page { size: A4; margin: 10mm; }
+@media print {
+  html, body { width: 210mm; background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  main, .container, .page-root { width: 190mm !important; max-width: 190mm !important; margin: 0 auto !important; box-sizing: border-box; }
+  #btn-download, .no-print, button[data-clear] { display: none !important; }
+  section, .card, .panel, .group, .fieldset, .block { break-inside: avoid; page-break-inside: avoid; }
+}
+
+
+/* ===== PC-as-standard layout (mobile shows desktop width with horizontal scroll) ===== */
+:root { --pc-width: 1200px; }
+html, body { min-width: var(--pc-width); }
+body { overflow-x: auto; }
+main, .container, .page-root, .sheet, .paper { width: var(--pc-width); max-width: var(--pc-width); margin: 0 auto; box-sizing: border-box; }
+header, footer, section, .card, .panel, .group, .fieldset, .block { box-sizing: border-box; }
+img, canvas, svg { max-width: 100%; height: auto; }
+/* Prevent iOS auto-zoom on inputs */
+input, select, textarea { font-size: 16px; }
+/* Keep action buttons visible but not captured into PDF */
+#btn-download, #btn-download-image { position: relative; z-index: 2; }
+/* Optional: unify font rendering */
+body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* Avoid mobile responsive wraps that some CSS frameworks apply */
+@media (max-width: 1199.98px) {
+  .row, .flex, .grid { flex-wrap: nowrap !important; }
+}
+
+</style>
+
+<style id="mobile-adapt">
+@media (max-width: 768px){
+  /* 主容器铺满屏幕 */
+  .shell, #page, .container, main {
+    max-width: 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 多列布局在手机端纵向堆叠 */
+  .row, .grid, .flex, .cols, .form-row, .signature-row, .ack-row, .install-row {
+    display: block !important;
+  }
+  .col, [class*="col-"], .left, .right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 输入框全宽 */
+  input[type="text"], input[type="tel"], input[type="email"], input[type="date"],
+  input[type="number"], select, textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 标题与文字字号调整 */
+  h1, .title-xl {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+  }
+  body { font-size: 15px !important; }
+
+  /* 卡片/分区边距 */
+  .card, .section, .panel, .box {
+    padding: 12px !important;
+  }
+
+  /* 签名区堆叠，高度增加 */
+  #wrap-cus, #wrap-rep {
+    width: 100% !important;
+    display: block !important;
+    margin: 0 0 12px 0 !important;
+  }
+  #wrap-cus canvas, #wrap-rep canvas, .pad canvas {
+    width: 100% !important;
+    height: 180px !important;
+  }
+
+  /* 按钮可点性增强 */
+  button, .btn, input[type="button"], input[type="submit"] {
+    font-size: 16px !important;
+    padding: 10px 14px !important;
+  }
+
+  /* 页面整体左右边距缩小 */
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+</style>
+
+</head>
+<body>
+  <div class="shell" id="page">
+    <div class="accent-bar"></div>
+
+    <header>
+      <div class="logo" aria-label="Woodhaven Craftworks" role="img">
+        <img id="brand-logo" src="data:image/svg+xml;base64,PHN2ZyBpZD0i5Zu+5bGCXzEiIGRhdGEtbmFtZT0i5Zu+5bGCIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCA1NTEuOTQgMTA4Ljc2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTt9LmNscy0ye2ZpbGw6IzAwNGYyMjt9LmNscy0ze2NsaXAtcGF0aDp1cmwoI2NsaXAtcGF0aCk7fS5jbHMtNHtmaWxsOiNlYWFiMDA7fTwvc3R5bGU+PGNsaXBQYXRoIGlkPSJjbGlwLXBhdGgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiPjxwb2x5bGluZSBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMCA1OTUuMjggMCAwIDgxNS44OSAxNDkgODE1Ljg5IDc0NC4yOCIvPjwvY2xpcFBhdGg+PC9kZWZzPjx0aXRsZT5sb2dvIHBhY2thZ2UgY29weTwvdGl0bGU+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjIyNi4wNiAwLjM0IDIyMC43NCAzNi4yIDIxNS44OCAzNi4yIDIxMS45NCAxMi45MyAyMTEuODUgMTIuOTMgMjA3Ljk2IDM2LjIgMjAzLjA5IDM2LjIgMTk3LjczIDAuMzQgMjAzLjE4IDAuMzQgMjA1LjczIDIzLjExIDIwNS44MiAyMy4xMSAyMDkuODQgMC4zNCAyMTMuNzggMC4zNCAyMTcuOTcgMjMuNjkgMjE4LjA2IDIzLjY5IDIyMC41MyAwLjM0IDIyNi4wNiAwLjM0Ii8+PGcgY2xhc3M9ImNscy0zIj48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zNjMuNTIsMjUyLjYzYTkuMTksOS4xOSwwLDAsMSwuNzYtMy44NSw3Ljg4LDcuODgsMCwwLDEsMi0yLjc2LDguMjgsOC4yOCwwLDAsMSwyLjc3LTEuNjMsOSw5LDAsMCwxLDYuMiwwLDkuNDcsOS40NywwLDAsMSwyLjgxLDEuNjMsOS4wOCw5LjA4LDAsMCwxLDIsMi43Niw5LjIxLDkuMjEsMCwwLDEsLjc1LDMuODV2MTlhOS4yMSw5LjIxLDAsMCwxLS43NSwzLjg5LDguMzUsOC4zNSwwLDAsMS00Ljc4LDQuMzYsOS4xMiw5LjEyLDAsMCwxLTMuMS41NCw4LjkyLDguOTIsMCwwLDEtMy4xLS41NCw4LjE1LDguMTUsMCwwLDEtMi43Ny0xLjY4LDcuNTcsNy41NywwLDAsMS0yLTIuNjgsOS4wNiw5LjA2LDAsMCwxLS43Ni0zLjg5Wm01LjE2LDE5YTMuMzIsMy4zMiwwLDAsMCwxLjA1LDIuNzYsMy44LDMuOCwwLDAsMCw0Ljg2LDAsMy40OCwzLjQ4LDAsMCwwLDEuMDUtMi43NnYtMTlhMy4zNywzLjM3LDAsMCwwLTEuMDUtMi43NiwzLjgsMy44LDAsMCwwLTQuODYsMCwzLjQ5LDMuNDksMCwwLDAtMS4wNSwyLjc2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQwMS4yLDI1Mi42M2E5LjE5LDkuMTksMCwwLDEsLjc2LTMuODUsNy44OCw3Ljg4LDAsMCwxLDItMi43Niw4LjI4LDguMjgsMCwwLDEsMi43Ny0xLjYzLDksOSwwLDAsMSw2LjIsMCw5LjQ3LDkuNDcsMCwwLDEsMi44MSwxLjYzLDkuMDgsOS4wOCwwLDAsMSwyLDIuNzYsOS4yMSw5LjIxLDAsMCwxLC43NSwzLjg1djE5YTkuMjEsOS4yMSwwLDAsMS0uNzUsMy44OSw4LjM1LDguMzUsMCwwLDEtNC43OCw0LjM2LDkuMTIsOS4xMiwwLDAsMS0zLjEuNTQsOC45Miw4LjkyLDAsMCwxLTMuMS0uNTQsOC4xNSw4LjE1LDAsMCwxLTIuNzctMS42OCw3LjU3LDcuNTcsMCwwLDEtMi0yLjY4LDkuMDYsOS4wNiwwLDAsMS0uNzYtMy44OVptNS4xMiwxOWEzLjM1LDMuMzUsMCwwLDAsMSwyLjc2LDMuODEsMy44MSwwLDAsMCw0Ljg3LDAsMy40OCwzLjQ4LDAsMCwwLDEtMi43NnYtMTlhMy4zNiwzLjM2LDAsMCwwLTEtMi43NiwzLjgxLDMuODEsMCwwLDAtNC44NywwLDMuNDksMy40OSwwLDAsMC0xLDIuNzZaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDM5LjE0LDI4MC4wNVYyNDQuMThoNy42M2MzLDAsNS4xOS43OSw2Ljc0LDIuNDJzMi4zMSwzLjksMi4zMSw2Ljg3djE2Ljc4YzAsMy4zNS0uOCw1Ljg2LTIuNDMsNy40NXMtNCwyLjM5LTcsMi4zOWgtNy4yMVptNS4xNS0zMXYyNi4yaDIuMzlhMy43MiwzLjcyLDAsMCwwLDMuMDYtMS4wOSw1LjI1LDUuMjUsMCwwLDAsLjkyLTMuMzhWMjUzLjQ3YTUuNTcsNS41NywwLDAsMC0uODMtMy4yNywzLjgxLDMuODEsMCwwLDAtMy4xNS0xLjE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzNTcuODQgMzYuMiAzNTcuODQgMC4zNCAzNjMgMC4zNCAzNjMgMTUuNjkgMzY5LjM3IDE1LjY5IDM2OS4zNyAwLjM0IDM3NC41MiAwLjM0IDM3NC41MiAzNi4yIDM2OS4zNyAzNi4yIDM2OS4zNyAyMC4yMiAzNjMgMjAuMjIgMzYzIDM2LjIgMzU3Ljg0IDM2LjIiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01MTIuMTUsMjgwLjA1bDgtMzUuODdoNC4yOWw4LDM1Ljg3aC01LjE0bC0xLjU0LTcuN2gtN2wtMS41LDcuN1ptMTIuNzEtMTIuNTItMi41MS0xM2gtLjExbC0yLjUxLDEzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSI0NDcuOCAwLjM0IDQ0MC40MyAzNi4yIDQzNS44OSAzNi4yIDQyOC41NiAwLjM0IDQzNCAwLjM0IDQzOC4xMyAyNS40MSA0MzguMTkgMjUuNDEgNDQyLjM1IDAuMzQgNDQ3LjggMC4zNCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSI0NjcuMDUgMzYuMiA0NjcuMDUgMC4zNCA0ODIuMzggMC4zNCA0ODIuMzggNS4xOSA0NzIuMTggNS4xOSA0NzIuMTggMTUuNjkgNDgxLjA5IDE1LjY5IDQ4MS4wOSAyMC41NSA0NzIuMTggMjAuNTUgNDcyLjE4IDMxLjEgNDgyLjM4IDMxLjEgNDgyLjM4IDM2LjIgNDY3LjA1IDM2LjIiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iNTAxLjY2IDM2LjIgNTAxLjY2IDAuMzQgNTA2LjYyIDAuMzQgNTE0LjM3IDIxLjk4IDUxNC40NCAyMS45OCA1MTQuNDQgMC4zNCA1MTkuNjEgMC4zNCA1MTkuNjEgMzYuMiA1MTQuNzIgMzYuMiA1MDYuODYgMTQuNjUgNTA2Ljc2IDE0LjY1IDUwNi43NiAzNi4yIDUwMS42NiAzNi4yIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzMzLjM4LDMxMy4xOXYyLjIxYTguMTYsOC4xNiwwLDAsMS0yLjM4LDUuNzgsOS4wOCw5LjA4LDAsMCwxLTIuNiwxLjg0LDcuNTUsNy41NSwwLDAsMS0zLjE5LjY3LDEwLjcsMTAuNywwLDAsMS0zLS40Miw2LjgxLDYuODEsMCwwLDEtMi43My0xLjQyLDguMjksOC4yOSwwLDAsMS0yLTIuNiw5LjQ1LDkuNDUsMCwwLDEtLjgtNC4wNlYyOTUuNDRhOS4xMiw5LjEyLDAsMCwxLC41OS0zLjI2LDcuODMsNy44MywwLDAsMSwxLjcyLTIuNjQsOC4yNSw4LjI1LDAsMCwxLDYtMi4zOSw3Ljc4LDcuNzgsMCwwLDEsNS45MSwyLjM5LDguMjcsOC4yNywwLDAsMSwxLjc2LDIuNzYsOS4yNSw5LjI1LDAsMCwxLC42MywzLjQzdjJoLTUuMTVWMjk2YTQuNDIsNC40MiwwLDAsMC0uODQtMi42NEEyLjc1LDIuNzUsMCwwLDAsMzI1LDI5Mi4zYTIuNTksMi41OSwwLDAsMC0yLjU1LDEuMTcsNi40NCw2LjQ0LDAsMCwwLS42MywzdjE4LjMzYTQuNzQsNC4yOCwwLDAsMCwuNjcsMi42M0EyLjYzLDIuNjMsMCwwLDAsMzI1LDMxOC41YTMuMzQsMy4zNCwwLDAsMCwxLjA5LS4xNywzLDMsMCwwLDAsMS4wOS0uNTgsMy4xNywzLjE3LDAsMCwwLC43NS0xLjA5LDQuMjgsNC4yOCwwLDAsMCwuMy0xLjc2di0xLjc2aDUuMTlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUzLjcxLDMyMy40NFYyODcuNTdIMzYyYzYuMDgsMCw5LjEsMy41Miw5LjEsMTAuNTVhMTMuODcsMTMuODcsMCwwLDEtMSw1LjQsNy45Myw3LjkzLDAsMCwxLTMuNDQsMy42bDUuNTMsMTYuMzZoLTUuNDVMMzYyLDMwOC4xNmgtMy4xNHYxNS4zMmgtNS4xNlptNS4xNi0zMS4wNnYxMS4xOGgyLjkzYTUuMiw1LjIsMCwwLDAsMi4xOC0uMzgsMi44NywyLjg3LDAsMCwwLDEuMjYtMS4wOSw0Ljk0LDQuOTQsMCwwLDAsLjU1LTEuNzVBMjAuMzEsMjAuMzEsMCwwLDAsMzY2LDI5OGExMy44NCwxMy44NCwwLDAsMC0uMTYtMi4zOCw1LDUsMCwwLDAtLjU5LTEuOGMtLjYzLS45Mi0xLjg0LTEuNDMtMy42NS0xLjQzaC0yLjY4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTM4OS4wNSwzMjMuNDRsOC0zNS44N2g0LjI4bDgsMzUuODdoLTUuMTVsLTEuNTEtNy43aC03bC0xLjUxLDcuN1ptMTIuNy0xMi41Ni0yLjUyLTEzaC0uMDhsLTIuNTEsMTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjMwOS4xIDc5LjYgMzA5LjEgNDMuNzMgMzI0LjQ0IDQzLjczIDMyNC40NCA0OC41OSAzMTQuMjUgNDguNTkgMzE0LjI1IDU5LjQ3IDMyMy4xNCA1OS40NyAzMjMuMTQgNjQuMzIgMzE0LjI1IDY0LjMyIDMxNC4yNSA3OS42NCAzMDkuMSA3OS42NCAzMDkuMSA3OS42Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjM0Ny4yOCA3OS42IDM0Ny4yOCA0OC41NCAzNDEuMzMgNDguNTQgMzQxLjMzIDQzLjY5IDM1OC4zOSA0My42OSAzNTguMzkgNDguNTQgMzUyLjQ0IDQ4LjU0IDM1Mi40NCA3OS42IDM0Ny4yOCA3OS42Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjQwMy41MyA0My42OSAzOTguMTUgNzkuNTYgMzkzLjMgNzkuNTYgMzg5LjM1IDU2LjI4IDM4OS4yOCA1Ni4yOCAzODUuMzggNzkuNTYgMzgwLjUyIDc5LjU2IDM3NS4xNSA0My42OSAzODAuNiA0My42OSAzODMuMTYgNjYuNDUgMzgzLjI0IDY2LjQ1IDM4Ny4yNiA0My42OSAzOTEuMiA0My42OSAzOTUuMzkgNjcuMDQgMzk1LjUgNjcuMDQgMzk3Ljk0IDQzLjY5IDQwMy41MyA0My42OSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTU0MSwyOTZhOSw5LDAsMCwxLC43Ny0zLjg1LDgsOCwwLDAsMSwyLTIuNzcsOSw5LDAsMCwxLDUuODctMi4xNyw5LDksMCwwLDEsMy4xMS41NCw5LjY2LDkuNjYsMCwwLDEsMi44MywxLjYzLDkuMjMsOS4yMywwLDAsMSwyLDIuNzcsOS40Nyw5LjQ3LDAsMCwxLC43NiwzLjg1djE5YTkuNiw5LjYsMCwwLDEtLjc2LDMuODksOC4zNCw4LjM0LDAsMCwxLTIsMi42OCw4LjU0LDguNTQsMCwwLDEtMi44MywxLjY3LDguNzgsOC43OCwwLDAsMS0zLjExLjU0LDguNDUsOC40NSwwLDAsMS0zLjA3LS41NCw4LjcyLDguNzIsMCwwLDEtMi44LTEuNjcsNy42MSw3LjYxLDAsMCwxLTItMi42OEE5LDksMCwwLDEsNTQxLDMxNVptNS4xNywxOC45MWEzLjMzLDMuMzMsMCwwLDAsMS4wNSwyLjc3LDMuNTksMy41OSwwLDAsMCwyLjQxLjg3LDMuNjYsMy42NiwwLDAsMCwyLjQ1LS44NywzLjU1LDMuNTUsMCwwLDAsMS0yLjc3VjI5NmEzLjQ0LDMuNDQsMCwwLDAtMS0yLjc2LDMuNjYsMy42NiwwLDAsMC0yLjQ1LS44OCwzLjYsMy42LDAsMCwwLTIuNDEuODgsMy41NCwzLjU0LDAsMCwwLTEuMDUsMi43NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01NzguOTIsMzIzLjQ0VjI4Ny41N2g4LjMxYzYuMDgsMCw5LjA4LDMuNTIsOS4wOCwxMC41NWExMy44OSwxMy44OSwwLDAsMS0uOTQsNS40LDguMDksOC4wOSwwLDAsMS0zLjQ2LDMuNmw1LjU1LDE2LjM2SDU5MmwtNC43OC0xNS4zMmgtMy4wOHYxNS4zMmgtNS4yM1ptNS4xNy0zMS4wNnYxMS4xOEg1ODdhNS4xLDUuMSwwLDAsMCwyLjE2LS4zOCwyLjc3LDIuNzcsMCwwLDAsMS4yNi0xLjA5LDUuMTUsNS4xNSwwLDAsMCwuNTYtMS43NSwyMi41MSwyMi41MSwwLDAsMCwuMTctMi4zOSwxNi4wNywxNi4wNywwLDAsMC0uMTctMi4zOCw1LjM3LDUuMzcsMCwwLDAtLjU5LTEuOGMtLjYzLS45Mi0xLjg1LTEuNDMtMy42NC0xLjQzaC0yLjY4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSI0OTcuNjMgNzkuNiA0OTcuNjMgNDMuNzMgNTAyLjggNDMuNzMgNTAyLjggNjAuMDkgNTAyLjg3IDYwLjA5IDUxMC4zOCA0My43MyA1MTUuNTUgNDMuNzMgNTA4LjUzIDU4LjA5IDUxNi44NyA3OS42IDUxMS40MiA3OS42IDUwNS41NiA2My42NSA1MDIuOCA2OC44NCA1MDIuOCA3OS42IDQ5Ny42MyA3OS42Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjcwLjkyLDI5Ny44N2gtNS4xNFYyOTYuN2E1Ljc5LDUuNzksMCwwLDAtLjg0LTMuMDYsMy4xNywzLjE3LDAsMCwwLTIuODMtMS4zLDMsMywwLDAsMC0xLjcxLjQyLDMsMywwLDAsMC0xLDEsMy45MiwzLjkyLDAsMCwwLS41MiwxLjUsOS43Myw5LjczLDAsMCwwLS4xNywxLjc2YzAsLjcxLDAsMS4zLjA3LDEuNzZhMi45LDIuOSwwLDAsMCwuMzgsMS4yNSwzLjE4LDMuMTgsMCwwLDAsLjg3LDEsOC45NCw4Ljk0LDAsMCwwLDEuNjEuNzlsMy45NSwxLjU1YTEwLjE3LDEwLjE3LDAsMCwxLDIuNzYsMS41NUE2Ljc2LDYuNzYsMCwwLDEsNjcwLDMwN2E4LjE3LDguMTcsMCwwLDEsLjc0LDIuNzYsMjYuMzMsMjYuMzMsMCwwLDEsLjIxLDMuNTIsMTcuNjcsMTcuNjcsMCwwLDEtLjQ2LDQuMjIsOC42NCw4LjY0LDAsMCwxLTEuNDcsMy4zMSw3LjY1LDcuNjUsMCwwLDEtMi43NSwyLjIyLDkuNzUsOS43NSwwLDAsMS00LjIuNzksOC45Myw4LjkzLDAsMCwxLTMuNDktLjY3LDcuOTEsNy45MSwwLDAsMS0yLjc2LTEuOCwxMC40MiwxMC40MiwwLDAsMS0xLjg1LTIuNjcsOC4xOCw4LjE4LDAsMCwxLS42Ni0zLjM1di0xLjkzaDUuMTdWMzE1YTQuMjksNC4yOSwwLDAsMCwuODMsMi41NSwzLjI1LDMuMjUsMCwwLDAsMi44LDEuMTMsNC42NCw0LjY0LDAsMCwwLDIuMDYtLjM4LDIuNjIsMi42MiwwLDAsMCwxLjEyLTEuMDksNC4wOSw0LjA5LDAsMCwwLC40OS0xLjY3YzAtLjY3LjA3LTEuMzguMDctMi4xOHMwLTEuNzEtLjA3LTIuM2E1LDUsMCwwLDAtLjQyLTEuNDYsMy40NiwzLjQ2LDAsMCwwLTEtLjkyLDcuMjMsNy4yMywwLDAsMC0xLjUzLS43NmwtMy43MS0xLjVjLTIuMi0uOTMtMy43My0yLjEtNC40Ny0zLjZhMTIuMzEsMTIuMzEsMCwwLDEtMS4xNS01LjYxLDEyLjg1LDEyLjg1LDAsMCwxLC41Ni0zLjg1LDguNDcsOC40NywwLDAsMSwxLjY4LTMuMTQsNy4yNyw3LjI3LDAsMCwxLDIuNjktMi4wOSw5LDksMCwwLDEsMy44Ny0uOCw4LjcyLDguNzIsMCwwLDEsMy41My43MSw4LjU4LDguNTgsMCwwLDEsMi43NiwxLjg5LDcuNzEsNy43MSwwLDAsMSwyLjMxLDUuNTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTg5LjI1LDMxNC45MkE1My4zNyw1My4zNywwLDAsMSwyODcsMjg1LjQxYTUzLjQsNTMuNCwwLDAsMC0xMDUuNDUsMTEuNzcsNTIuODIsNTIuODIsMCwwLDAsOC45NCwyOS41Miw1Ny4yMiw1Ny4yMiwwLDAsMS0xLjI3LTExLjc4IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjQ5Ljg1LDI3M2E0NC41LDQ0LjUsMCwwLDEsMTkuMDksNC4yOCwzOC44MSwzOC44MSwwLDAsMC02My40NSwyOS45MywzMy4xMiwzMy4xMiwwLDAsMCwuMzcsNS4yMyw0NC4yMiw0NC4yMiwwLDAsMSw0NC0zOS40NCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTI5NC41NCwyNjcuMjlhNTQuMjEsNTQuMjEsMCwwLDEtMTAwLjEsMzcuMzksNTQuMSw1NC4xLDAsMSwwLDEwMC4xLTM3LjM5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJNMTM4LjU1LDI2Ny4yMmwtMS42Ni4zMmMtLjU0LjExLTEuMDguMTYtMS41Ni4yN2E3LjgsNy44LDAsMCwxLTEuOTMuMDYsOC41OSw4LjU5LDAsMCwxLTIuNTItLjcxYy0uODEtLjMyLTEuMTgtLjU4LTEuMTMtLjhzLjU0LS4zNywxLjQ1LS4zN2MuNDgsMCwxLjA3LS4wNiwxLjcyLS4xMXMxLjM5LS4xNiwyLjItLjI3bDIuNTItLjMyYy44NS0uMTYsMS43Ny0uMjcsMi42OC0uNDNhNDYsNDYsMCwwLDAtLjE2LTUuNzMsNS4yNCw1LjI0LDAsMCwwLS44MS0yLjc4Yy0xLTEtMS4yMy0xLjY2LS45MS0yczEuNDUtLjE3LDMuMzguNDhhMTAuMSwxMC4xLDAsMCwxLDEuNS42OSwxLjksMS45LDAsMCwxLC43NS43LDEuMDgsMS4wOCwwLDAsMSwuMTEuOCw2Ljc3LDYuNzcsMCwwLDEtLjM4LDEsNy42MSw3LjYxLDAsMCwwLS41MywyLjNjLS4xNiwxLjE4LS4zMywyLjU3LS40Myw0LjIzLDEuNS0uMzgsMi43OS0uNywzLjgtLjg2YTIyLjMsMjIuMywwLDAsMSwyLjYzLS4zNyw1LjUxLDUuNTEsMCwwLDEsMS43Mi4wNSwzLjQsMy40LDAsMCwxLDEuMTIuNDNjMS4xMy42OSwxLjY3LDEuMjMsMS41NiwxLjY2cy0xLC42NC0yLjc0LjY0Yy0uNDIsMC0xLDAtMS42LjExbC0yLjE1LjE2LTIuMzYuMTZjLS44LDAtMS41LjE2LTIuMTQuMjF2LjQzcTIuNzMsMy4xMyw1LDUuMzFjMS41LDEuNDQsMi45LDIuNzMsNC4yNCwzLjhhMjYuMDUsMjYuMDUsMCwwLDAsNCwyLjYyLDI1LjMzLDI1LjMzLDAsMCwwLDQuMDcsMS44MmMxLjQ1LjU0LDIuMiwxLDIuMiwxLjM5cy0uNy41OS0yLjIuNjVjLTEuODIuMS0zLjIxLjEtNC4yOS4xYTEwLjQ3LDEwLjQ3LDAsMCwxLTIuNTItLjI2LDMuNzMsMy4zMywwLDAsMS0xLjQ0LS43LDUuNjMsNS42MywwLDAsMS0xLjEzLTEuMzRjLTEuMDctMS40NC0yLTIuNjgtMi43OS0zLjY5cy0xLjQ1LTEuOTMtMi0yLjczLTEuMTItMS41Ni0xLjYxLTIuMi0xLTEuMzktMS41LTIuMDl2NS4wOWMwLDIuMDksMCw0Ljc2LjA2LDgsMCwxLjIzLS4wNiwyLjE5LS4xMSwyLjk0YTE1LjQ4LDE1LjQ4LDAsMCwxLS4yNywxLjkzYy0uMjcsMS4xOC0uNywxLjgyLTEuMTgsMS44N3MtMS4xOC0uNTktMS44OC0xLjg3YTUuNTMsNS41MywwLDAsMS0uNTMtMS4xMywzLjIzLDMuMjMsMCwwLDEtLjE2LTEsNC4yNyw0LjI3LDAsMCwxLC4xNi0xLjEzLDYuNiw2LjYsMCwwLDEsLjUzLTEuMjgsMi45MiwyLjkyLDAsMCwwLC4yNy0xLDIwLjYzLDIwLjYzLDAsMCwwLC4yNy0yLjA5Yy4xMS0uOTEuMTYtMi4xNC4yNy0zLjY0cy4xNi0zLjQyLjI3LTUuODNhMzguODMsMzguODMsMCwwLDEtMyw0Ljc2LDI3LjU1LDI3LjU1LDAsMCwxLTMuMzcsMy42NCwyMi4yOSwyMi4yOSwwLDAsMS0zLjcsMi43MywzMi4xLDMyLjEsMCwwLDEtNC4wOCwyYy0xLC40My0xLjYxLjQ5LTEuNzIuMjdzLjI3LS42NCwxLjI0LTEuMjhhMzIuMzUsMzIuMzUsMCwwLDAsNC0zLDQwLjI4LDQwLjI4LDAsMCwwLDMuNjQtMy43NSwzMy40NSwzMy40NSwwLDAsMCwzLjA2LTQuMjNjLjc1LTEuNjEsMS41NS0zLjA1LDIuMi00LjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0xMzEuODQsMzE3LjM0Yy4xNywxLS4wNSwxLjcxLS41Mywycy0xLjEzLjE2LTEuOTMtLjQ4YTEyLjExLDEyLjExLDAsMCwxLTEuNC0xLjM5LDkuMjgsOS4yOCwwLDAsMS0xLjE4LTEuNTZjLS40OC0uNjktLjY0LTEuMTctLjQzLTEuMzlzLjc2LS4yNywxLjc3LS4xYTUuOTMsNS45MywwLDAsMSwyLjc0LDEsMywzLDAsMCwxLDEsMS44OG0xLjkzLDQuMjhjLS44NSwyLjQ2LTEuNiw0LjYtMi4xNCw2LjM3YTQ1LjMzLDQ1LjMzLDAsMCwwLTEuMTgsNC4zOWMtLjMyLDEuMjktLjcsMS45My0xLjEzLDEuODhzLTEuMTItMS0yLTIuNzljLS4zMi0uNjktLjU0LTEuMjMtLjctMS42NmEyLjQzLDIuNDMsMCwwLDEtLjEtMSwuODcuODcsMCwwLDEsLjMyLS41OCwyLjg0LDIuODQsMCwwLDEsLjgtLjM4LDEuNDcsMS40NywwLDAsMCwuNzUtLjUzLDE1Ljc5LDE1Ljc5LDAsMCwwLDEuMjQtMS43MmMuNDItLjY0Ljg1LTEuMzksMS4zOS0yLjI1czEtMS43MSwxLjQ1LTIuNTFjMS0xLjcyLDEuNTUtMi41MiwxLjg3LTIuMzZzLjExLDEuMTgtLjU5LDMuMTZtMS4wOC0xMmExLjkxLDEuOTEsMCwwLDEtLjY1LDEuNzEsMS40MSwxLjQxLDAsMCwxLTEuNDQsMCwxMC43MSwxMC43MSwwLDAsMS0xLjYxLTEuMzQsMTAuNSwxMC41LDAsMCwxLTEuNDUtMS44MmMtLjU0LS44MS0uNy0xLjM0LS40OC0xLjU2cy45MS0uMTYsMi4wOS4xMWE2LjUyLDYuNTIsMCwwLDEsMi42OCwxLjEzLDIuMTgsMi4xOCwwLDAsMSwuODYsMS44Mm01LDIuMTRhMTQuNjUsMTQuNjUsMCwwLDAtLjMyLDQuMTdjMCwxLDAsMi0uMDYsMi43OXMtLjEsMS42LS4xNiwyLjM1LS4xNiwxLjUtLjI3LDIuMjUtLjI2LDEuNTYtLjQzLDIuMzZhMTUuNTksMTUuNTksMCwwLDEtMi40Niw1Ljc4LDE0LjM3LDE0LjM3LDAsMCwxLTQuNTYsNC4xOGMtMSwuNTktMS42MS43NS0xLjc3LjU5cy4xNi0uNjUuODYtMS40YTIwLjczLDIwLjczLDAsMCwwLDMuMjItNC4xMiwxNy4yNSwxNy4yNSwwLDAsMCwyLTQuODIsMjYuNjgsMjYuNjgsMCwwLDAsLjU5LTIuODNjLjE2LTEuMDguMjctMi4yNS4zOC0zLjQ4YTM2LjY5LDM2LjY5LDAsMCwwLDAtNS45NSwxMS41NCwxMS41NCwwLDAsMC0uNjUtMy4zMmMtLjQ4LS44NS0uNTktMS4zOS0uMzItMS42czEsMCwyLjA5LjUzYTExLjI2LDExLjI2LDAsMCwxLDEuNC43LDQuMyw0LjMsMCwwLDEsLjY5LjUzLjY3LjY3LDAsMCwxLC4xMS41NCwzLjIsMy4yLDAsMCwwLS4zMi43NW03LjU2LDUuNzNhMTQuMTQsMTQuMTQsMCwwLDEsMS41NS0uNDNjLjQzLS4xMS44MS0uMTYsMS4xMy0uMjJhNS4yNiw1LjI2LDAsMCwxLC44Ni0uMDUsMy4yNCwzLjI0LDAsMCwxLC43NS4xMWMuNzUuMjEsMS4wNy40OCwxLjA3Ljg1cy0uNDguNjUtMS40NSwxYy0uNjkuMjEtMS4zOS4zNy0yLC41M3MtMS4yOS4yNy0yLC4zOGE4LjQsOC40LDAsMCwwLS4wNSwxLjEyLDcuMTQsNy4xNCwwLDAsMS0uMDYsMS4xM2MuMTctLjExLjc2LjA1LDEuODMuNTNhMTEuODIsMTEuODIsMCwwLDEsMi40MSwxLjQ1LDMuNywzLjcsMCwwLDEsMS4xOCwyLDMuMTIsMy4xMiwwLDAsMSwuMTEsMS4zNCwxLDEsMCwwLDEtLjM4Ljc1LjgyLjgyLDAsMCwxLS42OS4xNiwxLjQzLDEuNDMsMCwwLDEtLjgxLS41NGMtLjMyLS4zNy0uNy0uNzUtMS0xLjE4YTE0LjY0LDE0LjY0LDAsMCwxLTEtMS4zOWMtLjMyLS40OC0uNjQtMS0uOTEtMS4zOWExMy44LDEzLjgsMCwwLDEtLjY0LTEuMjh2NS41NmMwLC40My4wNS43NS4wNS45MWExNi45MSwxNi45MSwwLDAsMSwuMTEsMi44NCwxMC4yNiwxMC4yNiwwLDAsMS0uNDMsMi40N2MtLjIxLjc0LS40OCwxLjEyLS44NiwxLjE3cy0uNy0uMjEtMS4wNy0uNjlhMTAuNTksMTAuNTksMCwwLDEtLjgtMS4yOSw0LjEyLDQuMTIsMCwwLDEtLjMzLTEuMTgsNC41OSw0LjU5LDAsMCwxLC4xNi0xLjZjLjE3LS42NC4zOC0xLjUuNjUtMi41NywwLS4xNiwwLS4zOC4xLS41OXMuMTEtLjU0LjE3LS44NmE5Ljc0LDkuNzQsMCwwLDAsLjEtMS4zOWMuMDYtLjU0LjExLTEuMjMuMTYtMmExNywxNywwLDAsMS0yLjg5LDMuNjksMTIuMjYsMTIuMjYsMCwwLDEtMy4xNywyLjI1Yy0uOTEuNDgtMS4zOS41OS0xLjUuNDNzLjIyLS41OS45MS0xLjI5YTIwLjkzLDIwLjkzLDAsMCwwLDMuMDYtMy41MywyMi43LDIyLjcsMCwwLDAsMi41OC00LjYxLDExLDExLDAsMCwxLTItLjA1LDQuODgsNC44OCwwLDAsMS0xLjM0LS4zMmMtLjU5LS4yMi0uODYtLjQzLS44Ni0uNTlzLjM4LS4zMiwxLS4zMiwxLjE4LS4xMSwxLjkzLS4yMiwxLjU2LS4yNiwyLjQxLS40MmMuMDYtMy40My0uMDUtNS45NS0uMTYtNy41NWE5LjExLDkuMTEsMCwwLDAtLjU5LTMuMDZjLS41My0uOC0uNjQtMS4zMy0uMzctMS41NXMxLS4xMSwyLjI1LjM4YTMuNDYsMy40NiwwLDAsMSwxLjgyLDEuMTIsMS40MywxLjQzLDAsMCwxLS4xLDEuMzksMy41OSwzLjU5LDAsMCwwLS4yNy43YzAsLjI3LS4xMS43LS4xNiwxLjI4cy0uMTEsMS40NS0uMTYsMi41MmMtLjExLjkxLS4yMiwyLjM2LS4yNyw0LjE4bS0zLjExLTIuNjNjLS4xNi43NS0uMzgsMS4yMy0uNywxLjRzLS43LjA1LTEuMTItLjMzbC0uMjctLjI2YTEuOTQsMS45NCwwLDAsMS0uMjctLjQ5Yy0uMTEtLjIxLS4yMi0uNDgtLjM4LS44NXMtLjMyLS44MS0uNTMtMS4zNC0uMjItMS0uMDYtMS4xMi41NC0uMTEsMSwuMWE0LDQsMCwwLDEsMS45MywxLjI5LDEuNzQsMS43NCwwLDAsMSwuMzgsMS42bTcuNzctNC4yM2MuNjUuNTQsMSwuOTEsMSwxLjEzcy0uMjEuNTMtLjc1LjkxYTcuNDgsNy40OCwwLDAsMS0xLjEyLjhjLS41OS40My0xLjM0LDEtMi4zNiwxLjY2LS43LjQ4LTEuMDguNjQtMS4yNC40M3MwLS41NC40My0xLjEyYTEzLjYzLDEzLjYzLDAsMCwwLDEuNC0yLjE1LDQuMTMsNC4xMywwLDAsMCwuNTktMS41NWMwLS41OS4yMS0uOTEuNTMtMWE0LjQzLDQuNDMsMCwwLDEsMS41Ljg1bTUuNjktMi4yNWEzLjQ2LDMuNDYsMCwwLDAtLjI3LjkyYy0uMDUuMzctLjExLjg1LS4xNiwxLjQ5cy0uMDUsMS40NS0uMTEsMi40NywwLDIuMjUtLjEsMy42OXYzLjQzYzAsMS4yOC4wNSwyLjYyLjA1LDMuOTFzMCwyLjU3LjExLDMuOC4wNSwyLjI1LjEsMy4xYTIzLjIyLDIzLjIyLDAsMCwxLDAsMi45LDEwLjg1LDEwLjg1LDAsMCwxLS4yNiwxLjgyYy0uMzMsMS4zMy0uNywyLjA4LTEuMTgsMi4xOXMtLjkyLS4yNy0xLjQtMS4wN2ExMS4xMywxMS4xMywwLDAsMS0uNy0xLjM0LDQuMjMsNC4yMywwLDAsMS0uMzItMS4wNywzLjE1LDMuMTUsMCwwLDEsLjExLTEuMThjLjExLS40My4yNy0xLC40OC0xLjY2YTQuMTEsNC4xMSwwLDAsMCwuMTYtLjg1Yy4wNi0uNDMuMDYtMS4xOC4xMS0yLjE1cy4wNS0yLjM1LjA1LTQuMTJ2LTYuNzRjMC0xLjkzLS4wNS0zLjU0LS4xLTQuNzdzLS4xMS0yLjI1LS4yMi0zLjA1YTE3LjM5LDE3LjM5LDAsMCwwLS4zMi0xLjgyLDYuNTIsNi41MiwwLDAsMC0uNDMtMWMtLjY0LTEtLjgtMS41NS0uNDgtMS44N3MxLjE4LS4xNiwyLjYzLjM3bDEuNS42NGE2LjI1LDYuMjUsMCwwLDEsLjc1LjU0LjYxLjYxLDAsMCwxLC4xNi41OSwxLjUxLDEuNTEsMCwwLDEtLjE2Ljg1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJNMTYxLjgyLDM0OEgxMjQuNUE1LjUyLDUuNTIsMCwwLDEsMTE5LDM0Mi41VjI0OS44N2E1LjUxLDUuNTEsMCwwLDEsNS41My01LjUxaDM3LjMyYTUuNSw1LjUsMCwwLDEsNS41Miw1LjUxVjM0Mi41YTUuNTEsNS41MSwwLDAsMS01LjUyLDUuNTJNMTI0LjU1LDI0Ny4zNWEyLjUyLDIuNTIsMCwwLDAtMi41MiwyLjUyVjM0Mi41YTIuNTIsMi41MiwwLDAsMCwyLjUyLDIuNTJoMzcuMzJhMi41MiwyLjUyLDAsMCwwLDIuNTItMi41MlYyNDkuODdhMi41MiwyLjUyLDAsMCwwLTIuNTItMi41MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMTk5LjYgOTMuNTMgMjAwLjc0IDEwMC45NyAyMDAuNzQgMTAxLjE4IDIwMC43OCAxMDEuMTggMjAxLjI1IDk3Ljg2IDIwMi4wNyA5My41MyAyMDMuNDkgOTMuNTMgMjA0LjcgMTAwLjk3IDIwNC43IDEwMS4xOCAyMDQuNzQgMTAxLjE4IDIwNS4yOSA5Ny4yMSAyMDUuOTkgOTMuNTMgMjA3LjkzIDkzLjUzIDIwNS40MSAxMDQuMjEgMjA0LjA2IDEwNC4yMSAyMDIuOTggOTguNzMgMjAyLjc3IDk2LjM2IDIwMi43MyA5Ni4zNiAyMDIuMjYgMTAwLjE5IDIwMS40OCAxMDQuMjEgMjAwLjExIDEwNC4yMSAxOTcuNSA5My41MyAxOTkuNiA5My41MyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIyMTUuMTggOTMuNTMgMjE2LjMyIDEwMC45NyAyMTYuMzIgMTAxLjE4IDIxNi4zNiAxMDEuMTggMjE2LjgzIDk3Ljg2IDIxNy42NiA5My41MyAyMTkuMDcgOTMuNTMgMjIwLjI4IDEwMC45NyAyMjAuMjggMTAxLjE4IDIyMC4zMiAxMDEuMTggMjIwLjg3IDk3LjIxIDIyMS41NyA5My41MyAyMjMuNTEgOTMuNTMgMjIxIDEwNC4yMSAyMTkuNjQgMTA0LjIxIDIxOC41NiA5OC43MyAyMTguMzUgOTYuMzYgMjE4LjMxIDk2LjM2IDIxNy44NCAxMDAuMTkgMjE3LjA2IDEwNC4yMSAyMTUuNjkgMTA0LjIxIDIxMy4wOSA5My41MyAyMTUuMTggOTMuNTMiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMjMwLjc2IDkzLjUzIDIzMS45IDEwMC45NyAyMzEuOSAxMDEuMTggMjMxLjk0IDEwMS4xOCAyMzIuNDEgOTcuODYgMjMzLjI0IDkzLjUzIDIzNC42NSA5My41MyAyMzUuODYgMTAwLjk3IDIzNS44NiAxMDEuMTggMjM1LjkgMTAxLjE4IDIzNi40NSA5Ny4yMSAyMzcuMTUgOTMuNTMgMjM5LjA5IDkzLjUzIDIzNi41OCAxMDQuMjEgMjM1LjIyIDEwNC4yMSAyMzQuMTQgOTguNzMgMjMzLjkzIDk2LjM2IDIzMy44OSA5Ni4zNiAyMzMuNDMgMTAwLjE5IDIzMi42NCAxMDQuMjEgMjMxLjI3IDEwNC4yMSAyMjguNjcgOTMuNTMgMjMwLjc2IDkzLjUzIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzYzLjY1LDM0Ni45M2ExLjI3LDEuMjcsMCwxLDEsMS4yNiwxLjI5LDEuMjcsMS4yNywwLDAsMS0xLjI2LTEuMjkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMjU1LjQxIDkzLjUzIDI1Ni41NSAxMDAuOTcgMjU2LjU1IDEwMS4xOCAyNTYuNiAxMDEuMTggMjU3LjA2IDk3Ljg2IDI1Ny44OSA5My41MyAyNTkuMyA5My41MyAyNjAuNTEgMTAwLjk3IDI2MC41MSAxMDEuMTggMjYwLjU1IDEwMS4xOCAyNjEuMSA5Ny4yMSAyNjEuOCA5My41MyAyNjMuNzQgOTMuNTMgMjYxLjIzIDEwNC4yMSAyNTkuODcgMTA0LjIxIDI1OC44IDk4LjczIDI1OC41OCA5Ni4zNiAyNTguNTQgOTYuMzYgMjU4LjA4IDEwMC4xOSAyNTcuMjkgMTA0LjIxIDI1NS45MiAxMDQuMjEgMjUzLjMyIDkzLjUzIDI1NS40MSA5My41MyIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTM4OC41NSwzNDIuNzRjMC0yLjMyLjMyLTUuNTQsMy4zNi01LjU0czMuMzYsMy4yMiwzLjM2LDUuNTQtLjMxLDUuNDgtMy4zNiw1LjQ4LTMuMzYtMy4yNC0zLjM2LTUuNDhtNC42OSwwYzAtLjg0LjE5LTMuNzItMS4zMy0zLjcycy0xLjMzLDIuODgtMS4zMywzLjcyLS4xOSwzLjY2LDEuMzMsMy42NiwxLjMzLTIuOSwxLjMzLTMuNjYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik00MDEuNzYsMzQyLjc0YzAtMi4zMi4zMi01LjU0LDMuMzctNS41NHMzLjM2LDMuMjIsMy4zNiw1LjU0LS4zMiw1LjQ4LTMuMzYsNS44LTMuMzctMy4yNC0zLjM3LTUuNDhtNC43LDBjMC0uODQuMTktMy43Mi0xLjMzLTMuNzJzLTEuMzQsMi44OC0xLjM0LDMuNzItLjE5LDMuNjYsMS4zNCwzLjY2LDEuMzMtMi45LDEuMzMtMy42NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQxOS41LDM0Ni42OGgwYy0uNC45My0uODUsMS41NC0yLDEuNTRoLTIuNDcsMC0yLjUxLTMuOTEtMi41MS01LjY1cy4wNi01LjM3LDIuNTgtNS4zN2EyLDIsMCwwLDEsMS45LDEuMzVoMFYzMzAuNWgydjE3LjU1aC0yWm0uMDYtNGMwLS44NS4wOS0zLjcyLTEuMjQtMy43Mi0xLjQ4LDAtMS4zMSwyLjg1LTEuMzEsMy43MnMtLjE3LDMuNzQsMS4zMSwzLjc0YzEuMzMsMCwxLjI0LTIuODksMS4yNC0zLjc0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDMwLjYsMzMwLjV2OC4xaDBhMi42NCwyLjY0LDAsMCwxLC44NS0xLDIuMjEsMi4yMSwwLDAsMSwxLjMxLS4zOGMyLjEzLDAsMi4xOCwxLjg4LDIuMTgsMy41MXY3LjM0aC0ydi03LjM4YzAtLjc0LS4xMy0xLjY5LTEuMTgtMS42OS0xLjMyLDAtMS4yMSwxLjUtMS4yMSwyLjQxdjYuNjZoLTJWMzMwLjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDQ2LjMxLDM0Ni42OGgwYy0uNDEuOTMtLjgzLDEuNTQtMiwxLjU0LTIuNDgsMC0yLjUyLTMuOTEtMi41Mi01LjY1cy4wNy01LjM3LDIuNTgtNS4zN2EyLjA3LDIuMDcsMCwwLDEsMS45MSwxLjM1aDB2LTEuMThoMnYxMC42OGgtMlptLjA2LTRjMC0uODUuMDktMy43Mi0xLjI1LTMuNzJzLTEuMzEsMi44NS0xLjMxLDMuNzItLjE3LDMuNzQsMS4zMSwzLjc0LDEuMjUtMi44OSwxLjI1LTMuNzQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzM3LjkgOTMuNTMgMzM5LjM0IDEwMS42MSAzMzkuMzggMTAxLjYxIDMzOS40NSAxMDAuOTcgMzQwLjIzIDk2LjY2IDM0MC44OCA5My41MyAzNDIuODEgOTMuNTMgMzQwIDEwNC4yMSAzMzguNjkgMTA0LjIxIDMzNS43OSA5My41MyAzMzcuOSA5My41MyIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQ3MCwzNDMuMWMwLC44OSwwLDMuMzQsMS4yNSwzLjM0LDEuMDYsMCwxLjI1LTEuMTYsMS4yNS0yaDEuODRjMCwyLS44NywzLjc2LTMuMTEsMy43Ni0zLDAtMy4yNi0zLjE3LTMuMjYtNS40NHMuMjYtNS41OCwzLjItNS41OCwzLjIzLDMuMzgsMy4yMyw1LjU4di4zMlptMi4zNy0xLjQyYzAtLjgyLDAtMi43LTEuMi0yLjdzLTEuMTcsMS44OC0xLjE3LDIuN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik00ODMuMTgsMzM4LjZoMGEyLjcxLDIuNzEsMCwwLDEsLjg0LTEsMi4yNCwyLjI0LDAsMCwxLDEuMzItLjM4YzIuMTEsMCwyLjE3LDEuODgsMi4xNywzLjUxdjcuMzRoLTJ2LTcuMzhjMC0uNzQtLjEzLTEuNjktMS4xOS0xLjY5LTEuMzEsMC0xLjIsMS41LTEuMiwyLjQxdjYuNjZoLTJWMzM3LjM3aDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDk4LjY5LDMzOS41NWEyLjQyLDIuNDIsMCwwLDAtMS40OC0uNTcsMS4yLDEuMiwwLDAsMC0xLjM1LDEuMTRjMCwxLjgsMy4zNCwxLjg4LDMuMzQsNC45M2EyLjkyLDIuOTIsMCwwLDEtMy4wNiwzLjE3LDMsMywwLDAsMS0xLjc0LS41MXYtMS45NGEyLjUxLDIuNTEsMCwwLDAsMS42NS42NywxLjIzLDEuMjMsMCwwLDAsMS4zMy0xLjM1YzAtMS44OC0zLjM0LTItMy4zNC01YTIuNzgsMi43OCwwLDAsMSwyLjg2LTIuOTIsMy4yOSwzLjI5LDAsMCwxLDEuNzkuNDdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTEyLDM0OC4xM2MwLDMuODEtMS4xNSw0LjQ3LTMuMjYsNC40N2EyLjg2LDIuODYsMCwwLDEtMy4xNS0zLjA5di0uM2gxLjkyYzAsLjc2LjI4LDEuNjEsMS4yNywxLjYxLDEuMzMsMCwxLjIxLTEuMjksMS4yMS0yLjI2di0xLjc4aDBhMS44NywxLjg3LDAsMCwxLTEuOSwxLjQ0Yy0yLjU0LDAtMi42LTMuNjItMi42LTUuNDRzMC01LjU4LDIuNTYtNS41OGMxLjA2LDAsMS41Mi41OSwxLjk0LDEuNDRsMCwwdi0xLjIzaDJaTTUwOC43NiwzMzljLTEuMzgsMC0xLjI1LDIuOTItMS4yNSwzLjY4cy0uMTMsMy43OCwxLjMxLDMuNzgsMS4yMy0yLjgxLDEuMjMtMy42OCwwLTMuNzgtMS4yOS0zLjc4IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTE5LjE0LDM0Ni45M2ExLjI3LDEuMjcsMCwxLDEsMS4yNiwxLjI5LDEuMjcsMS4yNywwLDAsMS0xLjI2LTEuMjkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTguOTcgLTI0My44NCkiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01MzMuMjIsMzM5LjU3aC0uMDVhMS4wNiwxLjA2LDAsMCwwLS45My0uNTFjLTEuNzEsMC0xLjc1LDIuNDEtMS43NSwzLjU1czAsMy43NSwxLjcxLDMuNzVhMS41OCwxLjU4LDAsMCwwLDEtLjR2MS44NGEzLjEyLDMuMTIsMCwwLDEtMS42MS40MmMtMi44MSwwLTMuMTUtMy4zLTMuMTUtNS40MnMuMjUtNS42LDMuMTctNS42YTMuNDksMy40OSwwLDAsMSwxLjU5LjM2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTUzOS42MiwzNDIuNzRjMC0yLjMyLjMyLTUuNTQsMy4zNi01LjU0czMuMzcsMy4yMiwzLjM3LDUuNTQtLjMyLDUuNDgtMy4zNyw1LjQ4LTMuMzYtMy4yNC0zLjM2LTUuNDhtNC43LDBjMC0uODQuMTktMy43Mi0xLjM0LTMuNzJzLTEuMzMsMi44OC0xLjMzLDMuNzItLjE5LDMuNjYsMS4zMywzLjY2LDEuMzQtMi45LDEuMzQtMy42NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExOC45NyAtMjQzLjg0KSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTU1NS4xNCwzMzguNjhoMGEyLjIzLDIuMjMsMCwwLDEsMi4xLTEuNDgsMS44NywxLjg3LDAsMCwxLDEuOTIsMS40OGgwYTIuMjgsMi4yOCwwLDAsMSwyLjItMS40OGMxLjg4LDAsMi4zNSwxLjE2LDIuMzUsMi41OHY4LjI3aC0ydi03LjQ5YzAtLjc4LS4xLTEuNTgtMS4wOC0xLjU4LTEuNDEsMC0xLjI3LDEuMzMtMS4yNywyLjI4djYuNzloLTJWMzQwLjhjMC0uODUsMC0xLjgyLTEuMTUtMS44MnMtMS4xNiwxLjM3LTEuMiwyLjI4djYuNzloLTJWMzM3LjM3aDJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE4Ljk3IC0yNDMuODQpIi8+PC9nPjwvc3ZnPg==" alt="Woodhaven Craftworks Logo" loading="eager" decoding="sync">
+      </div>
+
+      <div class="title">
+        <h1>Project Acceptance Certificate</h1>
+      </div>
+
+      <div class="top-controls">
+        <div class="date-text" id="date-text">YYYY/MM/DD</div>
+      <button id="btn-download" class="ghost" type="button" aria-label="Download PDF">Download</button></div>
+    </header>
+
+    <main class="content" id="content">
+      <section class="card intro">
+        <p class="sub" style="margin:0 0 4px; font-weight:800">Dear Valued Customer, Thank you for choosing us. Please help inspect and review our installation service.</p>
+        <p class="sub" style="margin:0; font-weight:800">尊敬的客户：感谢您的信任。为持续提升服务质量，诚邀您对本次安装服务进行检查与反馈。</p>
+      </section>
+
+      <section class="card">
+        <h3>Project Information <span class="sub">/ 项目信息</span></h3>
+        <div class="grid-compact">
+          <label for="pm-id">PM/ID <span class="sub">（必填）</span></label>
+          <input id="pm-id" type="text" placeholder="e.g. PM-2025-0912" />
+
+          <label for="client-name">Client / Company <span class="sub">客户 / 公司名称（必填）</span></label>
+          <input id="client-name" type="text" placeholder="Enter client / company name" />
+
+          <label for="site-address">Project / Site Address <span class="sub">工程 / 施工地址（必填）</span></label>
+          <input id="site-address" type="text" placeholder="Enter project / site address" />
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Installation Service Feedback <span class="sub">/ 安装服务反馈</span></h3>
+        <div class="sub" style="margin-bottom:6px">Please tick one per row · 每行请选择一项（本节 5 个问题均为必选）</div>
+        <div class="table-wrap">
+          <table role="table" aria-label="Feedback">
+            <thead>
+              <tr>
+                <th class="no">NO</th>
+                <th>Feedback Item<br><span class="sub">安装服务事项</span></th>
+                <th style="width:28%">Response<br><span class="sub">请勾选</span></th>
+                <th style="width:34%">Remarks (if any)<br><span class="sub">备注（如有）</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="no">1</td>
+                <td>
+                  <div class="item-title">Did the installer arrive on time for installation?</div>
+                  <div class="item-sub">安装师傅是否按时到达？</div>
+                </td>
+                <td>
+                  <div class="ticks">
+                    <label class="tick-label"><input type="radio" name="q1" value="YES"> YES 是</label>
+                    <label class="tick-label"><input type="radio" name="q1" value="NO"> NO 否</label>
+                  </div>
+                </td>
+                <td class="remarks"><textarea placeholder="Enter remarks (if any)"></textarea></td>
+              </tr>
+              <tr>
+                <td class="no">2</td>
+                <td>
+                  <div class="item-title">Were the on-site pre-existing items handled with care?</div>
+                  <div class="item-sub">施工过程中是否妥善处理现场原有物品？</div>
+                </td>
+                <td>
+                  <div class="ticks">
+                    <label class="tick-label"><input type="radio" name="q2" value="YES"> YES 是</label>
+                    <label class="tick-label"><input type="radio" name="q2" value="NO"> NO 否</label>
+                  </div>
+                </td>
+                <td class="remarks"><textarea placeholder="Enter remarks (if any)"></textarea></td>
+              </tr>
+              <tr>
+                <td class="no">3</td>
+                <td>
+                  <div class="item-title">Has the site cleanliness been properly cleared?</div>
+                  <div class="item-sub">现场卫生是否清理干净？</div>
+                </td>
+                <td>
+                  <div class="ticks">
+                    <label class="tick-label"><input type="radio" name="q3" value="YES"> YES 是</label>
+                    <label class="tick-label"><input type="radio" name="q3" value="NO"> NO 否</label>
+                  </div>
+                </td>
+                <td class="remarks"><textarea placeholder="Enter remarks (if any)"></textarea></td>
+              </tr>
+              <tr>
+                <td class="no">4</td>
+                <td>
+                  <div class="item-title">Has the site carpentry installation been fully completed by the installer?</div>
+                  <div class="item-sub">木工安装工程是否已由安装人员全部完成？</div>
+                </td>
+                <td>
+                  <div class="ticks">
+                    <label class="tick-label"><input type="radio" name="q4" value="YES"> YES 是</label>
+                    <label class="tick-label"><input type="radio" name="q4" value="NO"> NO 否</label>
+                  </div>
+                </td>
+                <td class="remarks"><textarea placeholder="Enter remarks (if any)"></textarea></td>
+              </tr>
+              <tr>
+                <td class="no">5</td>
+                <td>
+                  <div class="item-title">Are you satisfied with this installation service?</div>
+                  <div class="item-sub">您对本次安装服务是否满意？</div>
+                </td>
+                <td>
+                  <div class="ticks">
+                    <label class="tick-label"><input type="radio" name="q5" value="YES"> YES 是</label>
+                    <label class="tick-label"><input type="radio" name="q5" value="NO"> NO 否</label>
+                  </div>
+                </td>
+                <td class="remarks"><textarea placeholder="Enter remarks (if any)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Other Suggestions <span class="sub">/ 其他改进建议</span></h3>
+        <textarea id="suggestions" placeholder="Share your suggestions or next request..."></textarea>
+      </section>
+
+      <section class="card">
+        <h3>Acknowledgement <span class="sub">/ 验收确认</span></h3>
+        <p class="sub" style="margin:-2px 0 8px; text-align:center">Please sign below to confirm acceptance of delivered and installed items. / 请在下方签名以确认已验收。</p>
+        <div class="signs">
+          <div>
+            <label>Customer Signature <span class="sub">客户签名（必填）</span></label>
+            <div id="wrap-cus" class="pad"><canvas id="sig-cus" class="signature"></canvas></div>
+            <span class="tiny"><button class="ghost" data-clear="sig-cus" type="button">清除 / Clear</button></span>
+          </div>
+          <div>
+            <label>Woodhaven Rep. Signature <span class="sub">公司代表签名</span></label>
+            <div id="wrap-rep" class="pad"><canvas id="sig-rep" class="signature"></canvas></div>
+            <span class="tiny"><button class="ghost" data-clear="sig-rep" type="button">清除 / Clear</button></span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    /* ===== 签名板（Retina 适配） ===== */
+    const pads = {};
+    function makePad(canvasId, wrapId){
+      const canvas = document.getElementById(canvasId);
+      const wrap = document.getElementById(wrapId);
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const resize = ()=>{
+        const r = wrap.getBoundingClientRect();
+        canvas.width = r.width * ratio; canvas.height = r.height * ratio;
+        canvas.style.width = r.width + 'px'; canvas.style.height = r.height + 'px';
+        const ctx = canvas.getContext('2d'); ctx.scale(ratio, ratio);
+      };
+      resize();
+      const pad = new SignaturePad(canvas, {minWidth:.9, maxWidth:2.6, penColor:'#0b5d32'});
+      canvas.addEventListener('mousedown', ()=>wrap.classList.add('signed'));
+      canvas.addEventListener('touchstart', ()=>wrap.classList.add('signed'));
+      window.addEventListener('resize', ()=>{ const data=pad.toData(); resize(); pad.fromData(data); });
+      pads[canvasId] = pad; return pad;
+    }
+    const padCus = makePad('sig-cus','wrap-cus');
+    const padRep = makePad('sig-rep','wrap-rep');
+
+    document.querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click', e=>{
+      const id = e.currentTarget.getAttribute('data-clear');
+      pads[id].clear();
+      document.getElementById(id).parentElement.classList.remove('signed');
+    }));
+
+    /* ===== 日期：自动填充 ===== */
+    (()=>{
+      const d=new Date();
+      const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),da=String(d.getDate()).padStart(2,'0');
+      const out=document.getElementById('date-text');
+      out.textContent = `${y}/${m}/${da}`;
+    })();
+  </script>
+
+<style>
+#export-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.9);z-index:99999;font:16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial}
+#export-overlay.show{display:flex}
+#export-overlay .box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+</style>
+<div id="export-overlay"><div class="box">Preparing PDF…</div></div>
+
+
+<script>
+(function(){
+  const btn = document.getElementById('btn-download');
+  if(!btn) return;
+
+  function loadScript(src){
+    return new Promise((resolve, reject)=>{
+      const s = document.createElement('script');
+      s.src = src; s.onload = ()=>resolve(); s.onerror = ()=>reject(new Error('load failed: '+src));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureLibs(timeoutMs=6000){
+    if (window.html2canvas && window.jspdf) return true;
+    const timer = new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')), timeoutMs));
+    const task = (async ()=>{
+      if (!window.html2canvas) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+      if (!window.jspdf) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+      return true;
+    })();
+    return Promise.race([timer, task]);
+  }
+
+  async function exportAsImagePDF(){
+    const src = document.body; // capture whole page incl. logo/title
+    window.scrollTo(0,0);
+    const { jsPDF } = window.jspdf;
+    const overlayEl = document.getElementById('export-overlay'); if(overlayEl) overlayEl.style.display='none';
+    const startTs = Date.now();
+    await rasterizeSVGs(document);
+    const canvas = await window.html2canvas(src, {
+      scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff',
+      windowWidth: document.documentElement.scrollWidth,
+      windowHeight: document.documentElement.scrollHeight,
+      scrollX: 0, scrollY: -window.scrollY, ignoreElements: (el)=> el && (el.id==='export-overlay' || el===btn)
+    });
+    const imgWidthPx = canvas.width, imgHeightPx = canvas.height;
+    const A4_RATIO = 297/210;
+    const pageHeightPx = Math.floor(imgWidthPx * A4_RATIO);
+    const pdf = new jsPDF({ orientation:'p', unit:'mm', format:'a4' });
+    let y = 0, first = true;
+    while (y < imgHeightPx) {
+      const sliceHeight = Math.min(pageHeightPx, imgHeightPx - y);
+      const pageCanvas = document.createElement('canvas');
+      pageCanvas.width = imgWidthPx; pageCanvas.height = sliceHeight;
+      const ctx = pageCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, y, imgWidthPx, sliceHeight, 0, 0, imgWidthPx, sliceHeight);
+      const imgData = pageCanvas.toDataURL('image/jpeg', 0.95);
+      const pageWmm = 210, margin = 10, innerWmm = pageWmm - margin*2;
+      const pageHmm = sliceHeight * innerWmm / imgWidthPx;
+      if (!first) pdf.addPage('a4','p');
+      pdf.addImage(imgData, 'JPEG', margin, margin, innerWmm, pageHmm, undefined, 'FAST');
+      first = false; y += sliceHeight;
+    }
+    pdf.save('Project_Acceptance.pdf');
+  }
+
+  async function handleDownload(){
+    const overlay = document.getElementById('export-overlay');
+    try{
+      overlay && overlay.classList.add('show');
+      btn.disabled = true;
+      await ensureLibs();              // try to load libs (with timeout)
+      await Promise.race([
+        exportAsImagePDF(),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('export timeout')), 12000))
+      ]);        // try image-based export with timeout
+    } catch (e){
+      console.warn('Image-PDF failed, fallback to print:', e && e.message ? e.message : e);
+      // Fallback: open system print (A4 CSS applied) -> user can "Save as PDF"
+      window.print();
+    } finally {
+      overlay && overlay.classList.remove('show');
+      btn.disabled = false;
+    }
+  }
+
+  btn.addEventListener('click', handleDownload);
+})();
+</script>
+
+
+<script>
+(function(){ 
+  Array.from(document.images||[]).forEach(img=>{ if(!img.getAttribute('crossorigin')) img.setAttribute('crossorigin','anonymous'); });
+})();
+</script>
+
+
+<script>
+async function rasterizeSVGs(root=document){
+  const imgs = Array.from(root.querySelectorAll('img'));
+  for (const img of imgs) {
+    const src = img.getAttribute('src') || '';
+    const isSVG = src.includes('image/svg+xml') || src.trim().toLowerCase().endsWith('.svg');
+    if(!isSVG) continue;
+    try {
+      // Create an Image to draw SVG
+      const tmp = new Image();
+      tmp.crossOrigin = 'anonymous';
+      tmp.src = src;
+      await new Promise((res,rej)=>{ tmp.onload=res; tmp.onerror=rej; });
+      // Decide raster size based on rendered CSS size for clarity
+      const cssW = Math.max( (img.clientWidth || 0),  (img.naturalWidth || 0), 200 );
+      const cssH = Math.max( (img.clientHeight || 0), (img.naturalHeight || 0), 80 );
+      const scale = Math.max(2, Math.ceil(window.devicePixelRatio || 2));
+      const w = Math.ceil(cssW * scale);
+      const h = Math.ceil(cssH * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h); // force opaque background
+      ctx.drawImage(tmp, 0, 0, w, h);
+      const pngData = canvas.toDataURL('image/png');
+      img.setAttribute('data-src-svg', src); // keep original
+      img.src = pngData; // replace with PNG for capture
+    } catch(e){
+      console.warn('Rasterize SVG failed', e);
+    }
+  }
+}
+</script>
+
+
+<style id="override-fullscreen">
+/* === Overrides: remove fixed PC width & make background truly fullscreen === */
+html, body { min-width: 0 !important; height: 100%; }
+body {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;   /* 改 center 则垂直居中 */
+  padding: 24px 12px !important;
+  overflow-x: hidden !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;    /* 背景铺满整个窗口 */
+}
+/* 让任何“page-root/sheet/paper”等固定宽度失效，由 .shell 控制宽度 */
+main, .container, .page-root, .sheet, .paper {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  box-sizing: border-box;
+}
+/* 主内容盒：居中并限制阅读宽度 */
+.shell#page {
+  width: 100% !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+}
+</style>
+
+
+<style id="override-button">
+/* 通用按钮橙色化 */
+button, .btn, .download, .download-btn, input[type=button], input[type=submit], a[role=button] {
+  background: #ff7a00 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 14px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+button:hover, .btn:hover, .download:hover, .download-btn:hover, 
+input[type=button]:hover, input[type=submit]:hover, a[role=button]:hover {
+  background: #ff8c1a !important;
+  box-shadow: 0 0 12px rgba(255,122,0,0.8), 0 4px 10px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px) !important;   /* 浮雕效果 */
+}
+button:active, .btn:active, .download:active, .download-btn:active, 
+input[type=button]:active, input[type=submit]:active, a[role=button]:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3) inset !important;
+}
+</style>
+
+
+<!-- 签名按钮与预览 -->
+<button id="openSign">客户签名</button>
+<img id="signaturePreview" alt="签名预览" style="max-height:80px;display:none;"/>
+
+<!-- 签名弹窗 -->
+<div id="signatureModal">
+  <canvas id="signaturePad"></canvas>
+  <div class="actions">
+    <button id="clearSign">清除</button>
+    <button id="saveSign">确认</button>
+  </div>
+</div>
+
+<style>
+/* PC端大框 */
+#signatureModal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 500px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  display: none;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#signaturePad {
+  width: 90%; height: 70%;
+  border: 2px solid #333;
+  background: #fefefe;
+}
+.actions {
+  margin-top: 10px;
+}
+
+/* 手机端全屏 */
+@media (max-width: 768px) {
+  #signatureModal {
+    top: 0; left: 0;
+    transform: none;
+    width: 100%; height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    background: rgba(0,0,0,0.85);
+  }
+  #signaturePad {
+    width: 95%; height: 70%;
+    background: #fff;
+  }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+<script>
+const modal = document.getElementById("signatureModal");
+const canvas = document.getElementById("signaturePad");
+const openBtn = document.getElementById("openSign");
+const clearBtn = document.getElementById("clearSign");
+const saveBtn = document.getElementById("saveSign");
+const preview = document.getElementById("signaturePreview");
+
+let signaturePad;
+
+// 适配大小
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+
+// 打开签名层
+openBtn.addEventListener("click", () => {
+  modal.style.display = "flex";
+  resizeCanvas();
+  signaturePad = new SignaturePad(canvas);
+});
+
+// 清除
+clearBtn.addEventListener("click", () => {
+  signaturePad.clear();
+});
+
+// 保存并关闭
+saveBtn.addEventListener("click", () => {
+  if (!signaturePad.isEmpty()) {
+    const dataURL = signaturePad.toDataURL();
+    preview.src = dataURL;
+    preview.style.display = "block";
+  }
+  modal.style.display = "none";
+});
+</script>
+
+
+<!-- ===== 强制 PC 弹窗 / 手机全屏 签名 Overlay ===== -->
+<style>
+#sig-modal {
+  position: fixed; inset: 0;
+  display: none; z-index: 99999;
+  align-items: center; justify-content: center; flex-direction: column;
+  background: rgba(0,0,0,.6);
+}
+#sig-modal .panel {
+  width: 880px; height: 520px; background:#fff; border-radius:14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  display:flex; flex-direction:column; gap:10px; padding:14px;
+}
+#sig-full { flex:1; width:100%; background:#fff; border:1px solid #ffd9ba; border-radius:10px; }
+#sig-modal .buttons { display:flex; gap:10px; justify-content:flex-end; }
+#sig-modal .buttons button {
+  padding:8px 14px; border:none; border-radius:8px; font-weight:700; cursor:pointer;
+}
+#sig-cancel { background:#e5e7eb; }
+#sig-clear  { background:#ffe3c2; }
+#sig-ok     { background:#ff7a00; color:#fff; box-shadow:0 2px 6px rgba(0,0,0,.25); }
+
+/* 手机端：全屏 */
+@media (max-width: 768px){
+  #sig-modal { background:#000; }
+  #sig-modal .panel { width:100%; height:100%; border-radius:0; box-shadow:none; padding:12px; }
+}
+</style>
+
+<div id="sig-modal" role="dialog" aria-modal="true" aria-label="签名">
+  <div class="panel">
+    <canvas id="sig-full"></canvas>
+    <div class="buttons">
+      <button id="sig-cancel" type="button">返回</button>
+      <button id="sig-clear"  type="button">清除</button>
+      <button id="sig-ok"     type="button">确认使用</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const modal = document.getElementById('sig-modal');
+  const canvas = document.getElementById('sig-full');
+  const btnCancel = document.getElementById('sig-cancel');
+  const btnClear  = document.getElementById('sig-clear');
+  const btnOK     = document.getElementById('sig-ok');
+
+  let fullPad = null;          
+  let currentId = null;        
+
+  function fitCanvas(c) {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const rect = c.getBoundingClientRect();
+    c.width = rect.width * ratio; c.height = rect.height * ratio;
+    c.style.width = rect.width + 'px'; c.style.height = rect.height + 'px';
+    const ctx = c.getContext('2d'); ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function openFor(targetId){
+    currentId = targetId;
+    modal.style.display = 'flex';
+    fitCanvas(canvas);
+    fullPad = new SignaturePad(canvas, {minWidth:1.2, maxWidth:3, penColor:'#0b5d32'});
+    try {
+      if (window.pads && window.pads[currentId] && !window.pads[currentId].isEmpty()) {
+        const data = window.pads[currentId].toData();
+        fullPad.fromData(data);
+      }
+    } catch(e){ console.warn('prefill failed', e); }
+  }
+
+  function closeModal(){
+    modal.style.display = 'none';
+    if (fullPad) { fullPad.off(); fullPad = null; }
+    currentId = null;
+  }
+
+  ['wrap-cus','wrap-rep'].forEach(wrapId=>{
+    const wrap = document.getElementById(wrapId);
+    if (!wrap) return;
+    wrap.style.cursor = 'pointer';
+    wrap.addEventListener('click', ()=>openFor(wrapId === 'wrap-cus' ? 'sig-cus' : 'sig-rep'));
+  });
+
+  btnCancel.addEventListener('click', closeModal);
+  btnClear.addEventListener('click', ()=> fullPad && fullPad.clear());
+  btnOK.addEventListener('click', ()=>{
+    if (!fullPad) return closeModal();
+    if (window.pads && window.pads[currentId]) {
+      const data = fullPad.toData();
+      window.pads[currentId].fromData(data);
+      const w = (currentId === 'sig-cus') ? document.getElementById('wrap-cus') : document.getElementById('wrap-rep');
+      if (w) w.classList.add('signed');
+    }
+    closeModal();
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (modal.style.display === 'flex' && fullPad){
+      const data = fullPad.toData();
+      fitCanvas(canvas);
+      fullPad.fromData(data);
+    }
+  });
+})();
+</script>
+
+
+<!-- 禁止内嵌小画布直接签名：只能点击后在弹窗/全屏签名 -->
+<style>
+.pad { cursor: pointer !important; }
+.pad canvas.signature { pointer-events: none !important; } /* 禁用小画布的鼠标/触控 */
+.pad::before { content: "点击/点按以全屏签名"; position: absolute; inset: auto 8px 6px auto;
+  background: #fff; border: 1px dashed #cbd5e1; color: #64748b; font-size: 11px;
+  padding: 2px 6px; border-radius: 6px; }
+</style>
+<script>
+(function(){
+  function disableInlinePads(){
+    try{
+      ['sig-cus','sig-rep'].forEach(function(id){
+        if (window.pads && window.pads[id] && typeof window.pads[id].off === 'function'){
+          window.pads[id].off();  // 移除小画布事件，防止直接签名
+        }
+        var c = document.getElementById(id);
+        if (c){ c.style.pointerEvents = 'none'; }
+      });
+    }catch(e){ console.warn('disable inline pads failed', e); }
+  }
+  // 立即尝试；并在加载完成后再执行一次确保成功
+  disableInlinePads();
+  window.addEventListener('load', disableInlinePads);
+})();
+</script>
+
+
+<script>
+/* 更稳妥的“回填到小画布”方案：不依赖现有 SignaturePad 实例，直接把弹窗签名绘制回目标 canvas */
+(function(){
+  const modal = document.getElementById('sig-modal');
+  const full = document.getElementById('sig-full');
+  const btnOK = document.getElementById('sig-ok');
+  const btnCancel = document.getElementById('sig-cancel');
+  const btnClear = document.getElementById('sig-clear');
+
+  let fullPad = null;
+  let targetCanvas = null;
+
+  function fitCanvas(c) {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const rect = c.getBoundingClientRect();
+    c.width = Math.max(1, Math.floor(rect.width * ratio));
+    c.height = Math.max(1, Math.floor(rect.height * ratio));
+    c.style.width = rect.width + 'px';
+    c.style.height = rect.height + 'px';
+    const ctx = c.getContext('2d');
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function openForCanvas(c) {
+    targetCanvas = c;
+    modal.style.display = 'flex';
+    fitCanvas(full);
+    if (fullPad) fullPad.off();
+    fullPad = new SignaturePad(full, {minWidth:1.2, maxWidth:3, penColor:'#0b5d32'});
+  }
+
+  // 绑定点击：任何 .pad（签名外框）点击打开弹窗
+  document.querySelectorAll('.pad').forEach(wrap => {
+    wrap.style.cursor = 'pointer';
+    wrap.addEventListener('click', () => {
+      const c = wrap.querySelector('canvas');
+      if (c) openForCanvas(c);
+    });
+  });
+
+  // 清除
+  btnClear.addEventListener('click', () => fullPad && fullPad.clear());
+  // 取消
+  btnCancel.addEventListener('click', () => { modal.style.display = 'none'; });
+
+  // 确认：把弹窗签名绘制到目标 canvas
+  btnOK.addEventListener('click', () => {
+    if (!fullPad || fullPad.isEmpty() || !targetCanvas) {
+      modal.style.display = 'none';
+      return;
+    }
+    const url = fullPad.toDataURL('image/png');
+    const img = new Image();
+    img.onload = () => {
+      // 确保目标 canvas 有像素尺寸（不只 CSS 尺寸）
+      const rect = targetCanvas.getBoundingClientRect();
+      if (!targetCanvas.width || !targetCanvas.height) {
+        targetCanvas.width = Math.max(1, Math.floor(rect.width));
+        targetCanvas.height = Math.max(1, Math.floor(rect.height));
+      }
+      const ctx = targetCanvas.getContext('2d');
+      // 清空后居中等比绘制
+      ctx.clearRect(0, 0, targetCanvas.width, targetCanvas.height);
+      const scale = Math.min(targetCanvas.width / img.width, targetCanvas.height / img.height);
+      const dw = img.width * scale;
+      const dh = img.height * scale;
+      const dx = (targetCanvas.width - dw) / 2;
+      const dy = (targetCanvas.height - dh) / 2;
+      ctx.drawImage(img, dx, dy, dw, dh);
+      // 标记已签名
+      const wrap = targetCanvas.closest('.pad');
+      if (wrap) wrap.classList.add('signed');
+    };
+    img.src = url;
+    modal.style.display = 'none';
+  });
+
+  // 窗口尺寸变化时保持清晰度
+  window.addEventListener('resize', () => {
+    if (modal.style.display === 'flex' && fullPad) {
+      const data = fullPad.toData();
+      fitCanvas(full);
+      fullPad.fromData(data);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
